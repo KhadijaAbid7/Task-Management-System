@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Task Management</title>
+    
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    
+           <!-- ==============Side bar -->
+      <aside class="sidebar">
+           <div class="logo">Task Management System</div>
+
+          <div class="menu">
+           <p onclick="showPage('dashboard-page')">
+           <i class="fa-solid fa-house"></i> Dashboard
+          </p>
+
+         <p onclick="showPage('tasks-page')">
+         <i class="fa-solid fa-list-check"></i> All Tasks
+         </p>
+
+         <p onclick="showPage('create-task-page')">
+         <i class="fa-solid fa-square-plus"></i> Create Task
+         </p>
+
+         <p onclick="showPage('employees-page')">
+         <i class="fa-solid fa-users"></i> Employees
+         </p>
+
+         <p onclick="showPage('history-page')">
+         <i class="fa-solid fa-clock-rotate-left"></i> Event History
+        </p>
+
+         <p onclick="showPage('test-results-page')">
+         <i class="fa-solid fa-clipboard-check"></i> Test Results
+         </p>
+
+        <p class="settings"><i class="fa-solid fa-gear"></i> Settings</p>
+          </div>
+         </div>
+        </aside>
+        
+        
+            <!-- Main content------------- -->
+
+ 
+      <main class="main-content">
+
+            <!-- ============ dashoboard page======= -->
+
+           <section id="dashboard-page" class="page active">
+          <h1> Good Morning,Khadija! </h1>
+          <p>Here is quick overview of your Tasks</p>
+         
+         <div class="cards">
+            <div class="card-box">
+                <p><i class="fa-solid fa-list-check"></i> Total Tasks</p>
+                <h2 id="total-tasks">0</h2>
+                 <p><i class="fa-solid fa-arrow-trend-up"></i> 12% from previous week </p>
+            </div>
+           
+            <div class="card-box">
+               <p><i class="fa-regular fa-clock"></i> Pending</p>
+                <h2 id="pending-tasks">0</h2>
+                 <p><i class="fa-solid fa-arrow-trend-up"></i>12% from previous week </p>
+            </div>
+
+             <div class="card-box">
+                <p><i class="fa-solid fa-spinner"></i> In Progress</p>
+                <h2 id="in-progress-tasks">0</h2>
+                 <p><i class="fa-solid fa-arrow-trend-up"></i>12% from previous week </p>
+            </div>
+
+             <div class="card-box">
+               <p><i class="fa-solid fa-circle-check"></i> Complete</p>
+                <h2 id="completed-tasks">0</h2>
+               <p><i class="fa-solid fa-arrow-trend-up"></i>12% from previous week </p>
+            </div>
+            </div>
+
+            <div class="overdue-box">
+                <div class="overdue-icon">
+              <i class="fa-solid fa-triangle-exclamation"></i>
+             </div>
+
+               <div class="overdue-content">
+                <h3 >Overdue Tasks</h3>
+               <h2 id="overdue-tasks">5</h2>
+               <p><i class="fa-solid fa-arrow-trend-up"></i>Deadline Passed · Still Uncomplete </p>
+            </div>
+
+         </div>
+          </section>
+
+
+
+    <!--=============================================================== All tasks ===================-->
+
+
+    
+          <section id="tasks-page" class="page">
+           <h1>Tasks List</h1>
+             
+        <table>
+           <thead>
+            <tr>
+                <th>Task ID</th>
+                <th>Title</th>
+                <th>Employee</th>
+                <th>Priority</th>
+                <th>Deadline</th>
+                <th>Status</th>
+                <th>Dependencies</th>
+            </tr>
+        </thead>
+
+        <!-- JavaScript will display tasks here -->
+        <tbody id="tasks-table-body"></tbody>
+    </table>
+    </section>
+
+
+
+         <!--==================== ------------------------------------------Create Task form====================== -->
+    
+      
+<section id="create-task-page" class="page">
+    <h1>Create New Task</h1>
+
+    <form id="create-task-form">
+
+        <label for="task-id">Task ID</label>
+        <input type="text" id="task-id" placeholder="Enter task ID" required>
+
+        <label for="task-title">Task Title</label>
+        <input type="text" id="task-title" placeholder="Enter task title" required>
+
+        <label for="task-employee">Assign Employee</label>
+        <select id="task-employee" required>
+            <option value="">Select Employee</option>
+            <option value="E101">Ali</option>
+            <option value="E102">Ayesha</option>
+            <option value="E103">Zeeshan</option>
+            <option value="E104">Fatima</option>
+            <option value="E105">Usman</option>
+        </select>
+
+        <label for="task-priority">Priority</label>
+        <select id="task-priority" required>
+            <option value="">Select Priority</option>
+            <option value="Low">Low</option>
+            <option value="Medium">Medium</option>
+            <option value="High">High</option>
+            <option value="Critical">Critical</option>
+        </select>
+
+        <label for="task-deadline"required >Deadline</label>
+        <input type="date" id="task-deadline">
+
+       
+<label for="task-dependencies">Dependencies</label>
+
+<select id="task-dependencies">
+    <option value="">Select Dependencies</option>
+    <option value="1">Task 1 - Create Navbar</option>
+    <option value="2">Task 2 - Design Dashboard</option>
+    <option value="3">Task 3 - Build Task Form</option>
+    <option value="4">Task 4 - Create Sidebar</option>
+    <option value="5">Task 5 - Add Employee List</option>
+</select>
+
+        <button type="submit">Create Task</button>
+
+    </form>
+</section>
+
+ <!------------------------------------------------------------------------------------ Employee workload -->
+
+    <section id="employees-page" class="page">
+       
+    </section>
+
+    <!-- Event History----------------------------------------------------------------- -->
+
+    <section id="event-history-page" class="page">
+    
+    </section>
+
+    <section id="test-results-page" class="page">
+
+        <!-----------------------------------------------------------------------------Test Results -->
+    </section>
+
+
+     <!----------- Settings -->
+    <section id="settings-page" class="page">
+       
+    </section>
+        </div>
+
+
+         
+        </main>
+ 
+<script src="script.js"></script>
+
+
+
+</body>
+</html>

@@ -1,0 +1,298 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "poppins", sans-serif;
+}
+
+
+body {
+    display: flex;
+    height: 100vh;
+    width: 100vw;
+}
+
+
+.sidebar {
+    width: 240px;
+    height:100vh;
+    background-color: #328877;
+    color: white;
+    padding: 20px;
+}
+
+.logo{
+    font-size: 24px;
+    font-weight: bold;
+    margin-top:40px;
+    margin-bottom: 40px;
+}
+
+.menu p {
+     cursor: pointer;
+    padding-top: 5px;
+    padding: 10px;
+    margin-bottom: 5px;
+     border-radius: 8px;
+      transition: background-color 0.3s ease;
+}
+
+.menu p:hover {
+    background-color: #164E42;
+}
+
+p i {
+    margin-right: 10px;
+    font-size: 18px;
+}
+
+.settings{
+    margin-top: 200px;
+}
+
+/* *********************************side bar************************************ */
+
+.page {
+    display: none;
+}
+
+
+.page.active {
+    display: block;
+}
+
+/* *****************************Dashboard Page************************* */
+
+#dashboard-page{
+    flex: 1; 
+    padding: 25px;
+    background-color: #ffffff;
+    overflow-y: auto;
+   
+}
+
+#dashboard-page h1{
+    margin-top :40px;
+    margin-bottom: 30px;
+    margin-left:20px;    
+}
+
+#dashboard-page p{
+     margin-left:20px;  
+     margin-bottom: 20px;
+     
+}
+.cards{
+    width:1200px;
+     height:200px;
+     display: flex;
+     flex-direction: row;
+     gap:20px;
+     justify-content: space-between;
+     box-sizing: border-box;
+     padding:20px;
+    
+}
+.cards .card-box{
+    color: white;
+    border-radius: 10px;
+    flex: 1;
+    padding: 12px;
+    box-sizing: border-box;
+    
+}
+
+.card-box p {
+    font-size: 15px;
+  
+    margin-top: 2px;
+}
+
+.card-box h2 {
+    font-size: 30px;
+    margin: 20px 85px;
+}
+
+
+.card-box p i{
+    font-size: 25px;
+    margin-top: 2px;
+   
+}
+.card-box:nth-child(1) {
+     background-color: rgb(255, 123, 0);
+      border: 2px solid #C45A00;
+}
+
+.card-box:nth-child(2) {
+    background-color:#26baec;
+     border: 2px solid #087FA8;
+}
+
+
+.card-box:nth-child(3) {
+    background-color:#00C853;
+     border: 2px solid #008C3A;
+}
+
+.card-box:nth-child(4) {
+    background-color:#8B5CF6;
+    border: 2px solid #6D28D9;
+    
+}
+
+.overdue-box {
+    display: flex;
+    align-items: center;
+    gap: 40px;
+    background-color: #fff4f2;
+    border: 1px solid #f5c6c0;
+    border-left: 5px solid #dc3545;
+    border-radius: 10px;
+    padding: 30px;
+    margin-left:20px;
+    width: 1150px;
+    box-sizing: border-box;
+    margin-top: 40px;
+}
+
+.overdue-icon {
+    font-size: 40px;
+    color: #dc3545;
+   
+}
+
+.overdue-content h3 {
+    font-size: 18px;
+    color: #333;
+}
+
+.overdue-content h2 {
+    font-size: 28px;
+    margin: 0 0 5px;
+    color: #dc3545;
+}
+
+.overdue-content p {
+    font-size: 13px;
+    margin: 0;
+    padding: 2px;
+    color: #666;
+    line-height: 1.5;
+
+}
+
+/* *********************************All Tasks************************************ */
+
+
+#tasks-page {
+    padding: 20px;
+    overflow-x: auto;
+    margin-top: 40px;
+   
+}
+
+
+#tasks-page h1{
+    margin :30px;
+    margin-left:500px ;
+}
+
+
+#tasks-page table {
+    width: 1000px;
+    border-collapse: collapse;
+    margin-top: 20px;
+    margin:30px;
+    background-color: #ffffff;
+    border-radius: 8px;
+    border: 2px solid #328877;
+}
+
+
+#tasks-page th{
+    padding: 12px 15px;
+    text-align: left;
+    border-bottom: 1px solid #dddddd;
+    white-space: nowrap;
+     background-color:#328877;
+    color: white;
+}
+
+#tasks-page tbody tr {
+    height:30px;
+    border-bottom: 1px solid #cccccc;
+}
+#tasks-page td{
+padding-left: 25px;
+}
+
+
+#tasks-page tbody tr:hover {
+    background-color: #e1eee9;
+}
+
+/* Red line for overdue tasks */
+#tasks-page tbody tr.overdue-task td {
+    background-color:rgba(241, 0, 0, 0.605);
+}
+
+
+/* ***********************Creat taskkk******************** */
+
+
+#create-task-page {
+    padding: 20px;
+}
+
+#create-task-page h1 {
+    color: #0A3A30;
+    margin-bottom: 20px;
+    margin-top: 20px;
+    margin-left: 40px;
+}
+
+#create-task-form {
+    width: 700px;
+    height: 520px;
+    background: white;
+    padding: 10px;
+    margin-left: 40px;
+    border-radius: 10px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-top: 10px;
+}
+
+#create-task-form label {
+    font-weight: 600;
+    color: #263832;
+    margin-top: 6px;
+}
+
+#create-task-form input,
+#create-task-form select {
+    
+    padding: 5px;
+    box-sizing: border-box;
+    border: 1px solid #d2dcd7;
+    border-radius: 6px;
+    font-size: 14px;
+}
+
+
+#create-task-form button {
+    margin-top: 10px;
+    padding: 10px;
+    background:#328877;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+}
+
+#create-task-form button:hover {
+    background: #145647;
+}
