@@ -99,7 +99,16 @@ p i {
     border-radius: 10px;
     flex: 1 1 200px;
     min-width: 0;
+    background-color: #359985;
+    border: 2px solid #164E42;
     padding: 12px;
+}
+
+.cards .card-box:hover {
+    background-color:#164E42;
+    transition: background-color 0.3s ease;
+    
+    
 }
 
 .card-box p {
@@ -118,9 +127,11 @@ p i {
     margin-top: 2px;
 }
 
-.card-box:nth-child(1) {
+/* .card-box:nth-child(1) {
     background-color: rgb(255, 123, 0);
     border: 2px solid #C45A00;
+    background-color:#328877;
+    border: 2px solid #145647;;
 }
 
 .card-box:nth-child(2) {
@@ -136,7 +147,7 @@ p i {
 .card-box:nth-child(4) {
     background-color: #8B5CF6;
     border: 2px solid #6D28D9;
-}
+} */
 
 .overdue-box {
     display: flex;
@@ -221,10 +232,29 @@ p i {
     background-color: #e1eee9;
 }
 
-#tasks-page tbody tr.overdue-task td {
-    background-color: rgba(241, 0, 0, 0.605);
+
+
+tr.overdue-task td {
+    background-color: #FEF3C7;
 }
 
+
+tr.blocked-task td {
+    background-color: #FEE2E2;
+}
+
+/
+tr.overdue-task.blocked-task td {
+    background-color: #FEF3C7;
+}
+
+
+
+
+tr.completed-task td {
+    background-color: #DCFCE7;
+}
+  
 #create-task-page {
     width: 100%;
     min-width: 0;
@@ -235,6 +265,10 @@ p i {
     color: #0A3A30;
     margin: 20px 0;
 }
+
+
+
+/* Form page */
 
 #create-task-form {
     width: 100%;
@@ -280,6 +314,11 @@ p i {
     background: #145647;
 }
 
+
+/* form ki date validate krni h  */
+
+
+/* REsponsive */
 @media (max-width: 768px) {
     body {
         flex-direction: column;
@@ -386,3 +425,6 @@ p i {
         padding: 15px;
     }
 }
+
+
+/* */

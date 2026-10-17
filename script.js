@@ -118,47 +118,54 @@ const tasks = [
     }
 ];
 
-function validateTask(task){
+// function validateTask(task){
 
-   if(!task.title){
-     return "Title is required";
-   }
+//    if(!task.title){
+//      return "Title is required";
+//    }
 
-   if(!employees.some(emp => emp.id === task.employee)){
-        return "Employee does not exist";
-   }
+//    if(!employees.some(emp => emp.id === task.employee)){
+//         return "Employee does not exist";
+//    }
 
-   if(!["Low","Medium","High","Critical"].includes(task.priority)){
-     return "Invalid Property";
-   }
+//    if(!["Low","Medium","High","Critical"].includes(task.priority)){
+//      return "Invalid Property";
+//    }
 
-   return "Task data is Valid";
+//    return "Task data is Valid";
+// }
+
+
+
+function updateDashboard() {
+
+    document.getElementById("total-tasks").textContent =
+        tasks.length;
+
+    document.getElementById("pending-tasks").textContent =
+        tasks.filter(task => task.status === "Pending").length;
+
+    document.getElementById("in-progress-tasks").textContent =
+        tasks.filter(task => task.status === "In-progress").length;
+
+    document.getElementById("completed-tasks").textContent =
+        tasks.filter(task => task.status === "Completed").length;
+
+    const today = new Date();
+
+    const todayString =
+        today.getFullYear() + "-" +
+        String(today.getMonth() + 1).padStart(2, "0") + "-" +
+        String(today.getDate()).padStart(2, "0");
+
+    document.getElementById("overdue-tasks").textContent =
+        tasks.filter(task =>
+            task.status !== "Completed" &&
+            task.deadline < todayString
+        ).length;
 }
 
-
-
-// total task
-document.getElementById("total-tasks").textContent = tasks.length;
-
-// pending
-document.getElementById("pending-tasks").textContent = tasks.filter(task=> task.status ==="Pending").length;
-
-// in progress
-
-document.getElementById("in-progress-tasks").textContent = tasks.filter(task => task.status === "In-progress").length;
-
-// complete
-
-document.getElementById("completed-tasks").textContent = tasks.filter(task => task.status === "Completed").length;
-
-
-// overdue
-
-document.getElementById("overdue-tasks").textContent =
-    tasks.filter(task =>
-        new Date(task.deadline) < new Date() &&
-        task.status !== "Completed"
-    ).length;
+updateDashboard();
 
 
 // -------------------------------------side bar k buttons---------------------------------------------------------
@@ -192,6 +199,7 @@ function sortTasks() {
         Medium: 3,
         Low: 4
     };
+    
 
     
     const now = new Date();
@@ -241,49 +249,81 @@ function sortTasks() {
 
 function renderTasksTable() {
 
-    
     if (!tableBody) {
         console.error("Tasks table body was not found.");
         return;
     }
 
-  
     const sortedTasks = sortTasks();
-
-
 
     const now = new Date();
 
-     const today =
-    now.getFullYear() + "-" +
-    String(now.getMonth() + 1).padStart(2, "0") + "-" +
-    String(now.getDate()).padStart(2, "0"); 
+    const today =
+        now.getFullYear() + "-" +
+        String(now.getMonth() + 1).padStart(2, "0") + "-" +
+        String(now.getDate()).padStart(2, "0");
 
-    
-    tableBody.innerHTML = sortedTasks.map(task => `
-        <tr class="${task.status !== "Completed" && task.deadline < today ? "overdue-task" : ""}">
-            <td>${task.id}</td>
-            <td>${task.title}</td>
-            <td>${task.employee}</td>
-            <td>${task.priority}</td>
-            <td>${task.deadline}</td>
-            <td>${task.status}</td>
-            <td>
-                ${task.dependencies.length > 0
-                    ? task.dependencies.join(", ")
-                    : "None"}
-            </td>
-        </tr>
-    `).join("");
+    tableBody.innerHTML = sortedTasks.map(task => {
+
+        // Check completed status
+        const isCompleted =
+            task.status.toLowerCase() === "completed";
+
+        // Check overdue status
+        const isOverdue =
+            !isCompleted && task.deadline < today;
+
+        // Check blocked status
+        const isBlocked =
+            !isCompleted &&
+            (task.dependencies || []).some(dependencyId => {
+
+                const dependencyTask = tasks.find(item =>
+                    String(item.id) === String(dependencyId)
+                );
+
+                return !dependencyTask ||
+                    dependencyTask.status.toLowerCase() !== "completed";
+            });
+
+        // Add CSS classes according to task condition
+        const rowClasses = [
+            isOverdue ? "overdue-task" : "",
+            isBlocked ? "blocked-task" : "",
+            isCompleted ? "completed-task" : ""
+        ].filter(Boolean).join(" ");
+
+        return `
+            <tr class="${rowClasses}">
+                <td>${task.id}</td>
+                <td>${task.title}</td>
+                <td>${task.employee ?? task.employeeId ?? ""}</td>
+                <td>${task.priority}</td>
+                <td>${task.deadline}</td>
+                <td>${task.status}</td>
+                <td>
+                    ${(task.dependencies || []).length > 0
+                        ? task.dependencies.join(", ")
+                        : "None"}
+                </td>
+            </tr>
+        `;
+
+    }).join("");
 }
 
 
 renderTasksTable();
 
+// form 
+
+// date validate 
 
 
 
-// form ko connecting with js
+
+// checking k user jo input kr ra h id aur title ,wo thk h
+
 
 
 
@@ -293,16 +333,11 @@ const createTaskForm = document.getElementById("create-task-form");
 createTaskForm.addEventListener("submit", function(event) {
     event.preventDefault();
 
-   
+
+    // Geting Task ID
     const taskId = document.getElementById("task-id").value.trim();
-    const taskTitle = document.getElementById("task-title").value.trim();
 
-    if (taskId === "") {
-        alert("Please enter Task ID");
-        return;
-    }
-
-  
+    
     const isDuplicate = tasks.some(task =>
         String(task.id) === taskId
     );
@@ -312,16 +347,39 @@ createTaskForm.addEventListener("submit", function(event) {
         return;
     }
 
+    // Geting Task Title
+    const taskTitle = document.getElementById("task-title").value.trim();
+
+    //getting other info 
+   const employeeId = document.getElementById("task-employee").value;
+    const priority = document.getElementById("task-priority").value;
+    const deadline = document.getElementById("task-deadline").value;
+    const dependencyId = document.getElementById("task-dependencies").value;
+
+    const dependencyIds = dependencyId ? [dependencyId] : [];
     
-    if (taskTitle === "") {
-        alert("Please enter Task Title");
-        return;
-    }
-
-    console.log("Task ID:", taskId);
-    console.log("Task Title:", taskTitle);
-
-    alert("Task ID and Title are valid!");
-});
 
 
+// jb user task create kry ga tu data yha aye ga
+
+const newTask = {
+    id: taskId,
+    title: taskTitle,
+    employee: employeeId,
+    priority: priority,
+    deadline: deadline,
+    dependencies: dependencyIds,
+    status: "Pending"
+};
+tasks.push(newTask);
+
+
+renderTasksTable();
+
+console.log("New Task:", newTask);
+alert("Task created successfully!");
+
+createTaskForm.reset();
+
+updateDashboard();
+}); 

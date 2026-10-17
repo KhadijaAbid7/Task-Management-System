@@ -67,19 +67,19 @@
             <div class="card-box">
                <p><i class="fa-regular fa-clock"></i> Pending</p>
                 <h2 id="pending-tasks">0</h2>
-                 <p><i class="fa-solid fa-arrow-trend-up"></i>12% from previous week </p>
+                 <p><i class="fa-solid fa-arrow-trend-up"></i>Tasks are pending</p>
             </div>
 
              <div class="card-box">
                 <p><i class="fa-solid fa-spinner"></i> In Progress</p>
                 <h2 id="in-progress-tasks">0</h2>
-                 <p><i class="fa-solid fa-arrow-trend-up"></i>12% from previous week </p>
+                 <p><i class="fa-solid fa-arrow-trend-up"></i>Tasks are in Progress </p>
             </div>
 
              <div class="card-box">
                <p><i class="fa-solid fa-circle-check"></i> Complete</p>
                 <h2 id="completed-tasks">0</h2>
-               <p><i class="fa-solid fa-arrow-trend-up"></i>12% from previous week </p>
+               <p><i class="fa-solid fa-arrow-trend-up"></i>Tasks are complete </p>
             </div>
             </div>
 
@@ -121,6 +121,7 @@
 
         <!-- JavaScript will display tasks here -->
         <tbody id="tasks-table-body"></tbody>
+       
     </table>
     </section>
 
@@ -160,7 +161,7 @@
         </select>
 
         <label for="task-deadline"required >Deadline</label>
-        <input type="date" id="task-deadline">
+        <input type="date" id="task-deadline" required>
 
        
 <label for="task-dependencies">Dependencies</label>
