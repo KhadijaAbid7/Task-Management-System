@@ -36,9 +36,7 @@
          <i class="fa-solid fa-clock-rotate-left"></i> Event History
         </p>
 
-         <p onclick="showPage('test-results-page')">
-         <i class="fa-solid fa-clipboard-check"></i> Test Results
-         </p>
+        
 
         <p class="settings"><i class="fa-solid fa-gear"></i> Settings</p>
           </div>
@@ -61,25 +59,25 @@
             <div class="card-box">
                 <p><i class="fa-solid fa-list-check"></i> Total Tasks</p>
                 <h2 id="total-tasks">0</h2>
-                 <p><i class="fa-solid fa-arrow-trend-up"></i> 12% from previous week </p>
+                
             </div>
            
             <div class="card-box">
                <p><i class="fa-regular fa-clock"></i> Pending</p>
                 <h2 id="pending-tasks">0</h2>
-                 <p><i class="fa-solid fa-arrow-trend-up"></i>Tasks are pending</p>
+                
             </div>
 
              <div class="card-box">
                 <p><i class="fa-solid fa-spinner"></i> In Progress</p>
                 <h2 id="in-progress-tasks">0</h2>
-                 <p><i class="fa-solid fa-arrow-trend-up"></i>Tasks are in Progress </p>
+               
             </div>
 
              <div class="card-box">
                <p><i class="fa-solid fa-circle-check"></i> Complete</p>
                 <h2 id="completed-tasks">0</h2>
-               <p><i class="fa-solid fa-arrow-trend-up"></i>Tasks are complete </p>
+               
             </div>
             </div>
 
@@ -99,7 +97,7 @@
 
 
 
-    <!--=============================================================== All tasks ===================-->
+    <!--=============================================================== All tasks page ===================-->
 
 
     
@@ -119,7 +117,7 @@
             </tr>
         </thead>
 
-        <!-- JavaScript will display tasks here -->
+    
         <tbody id="tasks-table-body"></tbody>
        
     </table>
@@ -127,7 +125,7 @@
 
 
 
-         <!--==================== ------------------------------------------Create Task form====================== -->
+         <!--==================== ------------------------------------------Create Task form page====================== -->
     
       
 <section id="create-task-page" class="page">
@@ -180,33 +178,102 @@
     </form>
 </section>
 
- <!------------------------------------------------------------------------------------ Employee workload -->
+ <!------------------------------------------------------------------------------------ Employee workload page -->
 
-    <section id="employees-page" class="page">
-       
-    </section>
+<section id="employees-page" class="page">
 
-    <!-- Event History----------------------------------------------------------------- -->
-
-    <section id="history-page" class="page">
     
-    </section>
+    <div class="workload-header">
+        <h1>Employee Workload</h1>
+        <p>Track task assignments and employee performance.</p>
+    </div>
 
-    <section id="test-results-page" class="page">
+   
+    <div class="workload-container">
 
-        <!-----------------------------------------------------------------------------Test Results -->
-    </section>
+        <div class="workload-selection">
+            <label for="workload-employee">Select Employee</label>
 
-
-     <!----------- Settings -->
-    <section id="settings-page" class="page">
-       
-    </section>
+            <select id="workload-employee">
+                <option value="">Choose an employee</option>
+                <option value="E101">Ali</option>
+                <option value="E102">Ayesha</option>
+                <option value="E103">Zeeshan</option>
+                <option value="E104">Fatima</option>
+                <option value="E105">Usman</option>
+            </select>
         </div>
+
+        
+        <div id="workload-employee-name" class="workload-employee-name">
+            Select an employee to view their workload.
+        </div>
+
+        
+        <div class="workload-grid">
+
+            <div class="workload-card">
+                <p>Total Assigned Tasks</p>
+                <h3 id="workload-total">0</h3>
+            </div>
+
+            <div class="workload-card">
+                <p>Completed Tasks</p>
+                <h3 id="workload-completed">0</h3>
+            </div>
+
+            <div class="workload-card">
+                <p>Pending Tasks</p>
+                <h3 id="workload-pending">0</h3>
+            </div>
+
+            <div class="workload-card">
+                <p>In Progress</p>
+                <h3 id="workload-progress">0</h3>
+            </div>
+
+            <div class="workload-card">
+                <p>Overdue Tasks</p>
+                <h3 id="workload-overdue">0</h3>
+            </div>
+
+            <div class="workload-card">
+                <p>Completion Rate</p>
+                <h3 id="workload-rate">0</h3>
+            </div>
+
+        </div>
+    </div>
+
+</section>
+
+
+    <!-- Event History page----------------------------------------------------------------- -->
+
+  
+<section id="history-page" class="page">
+    <h1>Event History</h1>
+    <p>Track task creation and status changes.</p>
+
+    <table class="history-table">
+        <thead>
+            <tr>
+                <th>Event</th>
+                <th>Task ID</th>
+                <th>Description</th>
+                <th>Date & Time</th>
+            </tr>
+        </thead>
+
+        <tbody id="history-table-body">
+        </tbody>
+    </table>
+</section>
+
 
 
          
-        </main>
+</main>
  
 <script src="script.js"></script>
 

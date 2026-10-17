@@ -13,6 +13,9 @@ body {
     margin: 0;
 }
 
+
+
+/* ************** sidebar */
 .sidebar {
     width: 240px;
     min-width: 240px;
@@ -50,6 +53,9 @@ p i {
     margin-top: 200px;
 }
 
+
+
+/* ********** main content */
 .main-content {
     flex: 1;
     min-width: 0;
@@ -63,6 +69,8 @@ p i {
     display: block;
 }
 
+
+/* **********8888 dashboard pagr */
 #dashboard-page {
     min-height: 100vh;
     width: 100%;
@@ -127,27 +135,7 @@ p i {
     margin-top: 2px;
 }
 
-/* .card-box:nth-child(1) {
-    background-color: rgb(255, 123, 0);
-    border: 2px solid #C45A00;
-    background-color:#328877;
-    border: 2px solid #145647;;
-}
 
-.card-box:nth-child(2) {
-    background-color: #26baec;
-    border: 2px solid #087FA8;
-}
-
-.card-box:nth-child(3) {
-    background-color: #00C853;
-    border: 2px solid #008C3A;
-}
-
-.card-box:nth-child(4) {
-    background-color: #8B5CF6;
-    border: 2px solid #6D28D9;
-} */
 
 .overdue-box {
     display: flex;
@@ -188,6 +176,8 @@ p i {
     line-height: 1.5;
 }
 
+
+/**********************************************************88 all task page*********************************************888 */
 #tasks-page {
     width: 100%;
     min-width: 0;
@@ -243,11 +233,10 @@ tr.blocked-task td {
     background-color: #FEE2E2;
 }
 
-/
+
 tr.overdue-task.blocked-task td {
     background-color: #FEF3C7;
 }
-
 
 
 
@@ -268,7 +257,35 @@ tr.completed-task td {
 
 
 
-/* Form page */
+@media screen and (max-width: 480px) {
+    #tasks-page {
+        padding: 5px;
+        overflow-x: hidden;
+    }
+
+    #tasks-page table {
+        width: 100%;
+        min-width: 0;
+        table-layout: fixed;
+        margin: 10px 0;
+        font-size: 9px;
+    }
+
+    #tasks-page th,
+    #tasks-page td {
+        padding: 4px 2px;
+        font-size: 9px;
+        white-space: normal;
+        overflow-wrap: anywhere;
+    }
+
+    #tasks-page h1 {
+        font-size: 20px;
+        margin: 15px 0;
+    }
+}
+
+/****************************************************************************** Form page */
 
 #create-task-form {
     width: 100%;
@@ -315,10 +332,8 @@ tr.completed-task td {
 }
 
 
-/* form ki date validate krni h  */
 
-
-/* REsponsive */
+/*************** REsponsive dashboard and sidebar*/
 @media (max-width: 768px) {
     body {
         flex-direction: column;
@@ -397,34 +412,221 @@ tr.completed-task td {
         font-size: 30px;
     }
 
-    #tasks-page {
+
+}
+
+
+
+/*********************************************************************** employee  page*/
+
+
+#employees-page {
+    width: 100%;
+    min-width: 0;
+    min-height: 100vh;
+    padding: 25px;
+    background-color: #ffffff;
+}
+
+
+.workload-header {
+    margin: 20px 0 30px;
+}
+
+.workload-header h1 {
+    color: #0A3A30;
+    margin-bottom: 10px;
+    font-size: 28px;
+}
+
+.workload-header p {
+    color: #666666;
+    font-size: 15px;
+}
+
+.workload-container {
+    width: 100%;
+    max-width: 1200px;
+    padding: 25px;
+    background-color: #ffffff;
+    border-radius: 10px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+}
+
+
+.workload-selection {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    max-width: 400px;
+    margin-bottom: 25px;
+}
+
+.workload-selection label {
+    font-weight: 600;
+    color: #263832;
+}
+
+.workload-selection select {
+    width: 100%;
+    padding: 10px;
+    font-size: 14px;
+    border: 1px solid #d2dcd7;
+    border-radius: 6px;
+    background-color: #ffffff;
+}
+
+.workload-selection select:focus {
+    outline: 2px solid #328877;
+    border-color: #328877;
+}
+
+.workload-employee-name {
+    color: #145647;
+    font-size: 18px;
+    font-weight: 600;
+    margin-bottom: 20px;
+}
+
+
+.workload-grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 20px;
+}
+
+
+.workload-card {
+    padding: 22px;
+    background-color: #F8FAF9;
+    border: 1px solid #d2dcd7;
+    border-left: 4px solid #328877;
+    border-radius: 10px;
+    transition: background-color 0.3s ease;
+}
+
+.workload-card:hover {
+    background-color: #eaf4f0;
+}
+
+.workload-card p {
+    color: #64748B;
+    font-size: 14px;
+    margin-bottom: 15px;
+}
+
+.workload-card h3 {
+    color: #145647;
+    font-size: 28px;
+    margin: 0;
+}
+
+
+@media (max-width: 768px) {
+    #employees-page {
         padding: 15px;
-        margin-top: 15px;
     }
 
-    #tasks-page h1 {
+    .workload-container {
+        padding: 15px;
+    }
+
+    .workload-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 12px;
+    }
+
+    .workload-card {
+        padding: 16px;
+    }
+
+    .workload-card h3 {
         font-size: 24px;
-        margin: 20px 0;
+    }
+}
+
+@media (max-width: 480px) {
+    .workload-grid {
+        grid-template-columns: 1fr;
     }
 
-    #tasks-page table {
-        min-width: 1000px;
-        margin: 20px 0;
-    }
-
-    #create-task-page {
-        padding: 15px;
-    }
-
-    #create-task-page h1 {
+    .workload-header h1 {
         font-size: 24px;
-    }
-
-    #create-task-form {
-        min-height: 0;
-        padding: 15px;
     }
 }
 
 
-/* */
+
+
+
+/********************888888888888888888 Event History Page */
+
+#history-page {
+    padding: 25px;
+    width: 100%;
+    min-height: 100vh;
+}
+
+#history-page h1 {
+    color: #0A3A30;
+    margin: 25px 0 10px;
+}
+
+#history-page > p {
+    color: #666;
+    margin-bottom: 25px;
+}
+
+.history-table {
+    width: 100%;
+    border-collapse: collapse;
+    border: 2px solid #328877;
+    background: white;
+}
+
+.history-table th {
+    background: #328877;
+    color: white;
+    padding: 12px;
+    text-align: left;
+}
+
+.history-table td {
+    padding: 12px;
+    border-bottom: 1px solid #ddd;
+}
+
+.history-table tbody tr:hover {
+    background: #e1eee9;
+}
+
+img,
+table {
+    max-width: 100%;
+}
+
+@media (max-width: 480px) {
+    .page {
+        padding: 10px;
+    }
+
+    h1 {
+        font-size: 20px;
+    }
+
+    table th,
+    table td {
+        padding: 6px;
+        font-size: 11px;
+    }
+
+    button {
+        max-width: 100%;
+    }
+
+    input,
+    select,
+    textarea {
+        max-width: 100%;
+    }
+}

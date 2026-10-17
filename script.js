@@ -136,7 +136,7 @@ const tasks = [
 // }
 
 
-
+//  for dashborad
 function updateDashboard() {
 
     document.getElementById("total-tasks").textContent =
@@ -168,7 +168,7 @@ function updateDashboard() {
 updateDashboard();
 
 
-// -------------------------------------side bar k buttons---------------------------------------------------------
+// -------------------------------------for side baaar btttn ---------------------------------------------------------
 
 function showPage(pageId) {
 
@@ -265,15 +265,14 @@ function renderTasksTable() {
 
     tableBody.innerHTML = sortedTasks.map(task => {
 
-        // Check completed status
+        
         const isCompleted =
             task.status.toLowerCase() === "completed";
 
-        // Check overdue status
         const isOverdue =
             !isCompleted && task.deadline < today;
 
-        // Check blocked status
+        
         const isBlocked =
             !isCompleted &&
             (task.dependencies || []).some(dependencyId => {
@@ -286,7 +285,7 @@ function renderTasksTable() {
                     dependencyTask.status.toLowerCase() !== "completed";
             });
 
-        // Add CSS classes according to task condition
+        
         const rowClasses = [
             isOverdue ? "overdue-task" : "",
             isBlocked ? "blocked-task" : "",
@@ -315,18 +314,15 @@ function renderTasksTable() {
 
 renderTasksTable();
 
+
+
 // form 
 
-// date validate 
 
 
 
 
 // checking k user jo input kr ra h id aur title ,wo thk h
-
-
-
-
 
 const createTaskForm = document.getElementById("create-task-form");
 
@@ -334,7 +330,7 @@ createTaskForm.addEventListener("submit", function(event) {
     event.preventDefault();
 
 
-    // Geting Task ID
+ 
     const taskId = document.getElementById("task-id").value.trim();
 
     
@@ -346,11 +342,9 @@ createTaskForm.addEventListener("submit", function(event) {
         alert("This Task ID already exists!");
         return;
     }
-
-    // Geting Task Title
+    
     const taskTitle = document.getElementById("task-title").value.trim();
 
-    //getting other info 
    const employeeId = document.getElementById("task-employee").value;
     const priority = document.getElementById("task-priority").value;
     const deadline = document.getElementById("task-deadline").value;
@@ -360,7 +354,7 @@ createTaskForm.addEventListener("submit", function(event) {
     
 
 
-// jb user task create kry ga tu data yha aye ga
+// jb user task create kry ga tu data yha aye ga , table mn add hoga,dashbord p count chnage b
 
 const newTask = {
     id: taskId,
@@ -380,6 +374,222 @@ console.log("New Task:", newTask);
 alert("Task created successfully!");
 
 createTaskForm.reset();
-
+logTaskCreated(newTask);
 updateDashboard();
 }); 
+
+
+
+
+/**************************************** employe worklooad*************************/
+
+const workloadEmployeeSelect =
+    document.getElementById("workload-employee");
+
+if (workloadEmployeeSelect) {
+
+    workloadEmployeeSelect.innerHTML =
+        '<option value="">Choose an employee</option>' +
+        employees.map(employee =>
+            `<option value="${employee.id}">
+                ${employee.name} (${employee.id})
+            </option>`
+        ).join("");
+
+  
+    workloadEmployeeSelect.addEventListener("change", updateEmployeeWorkload);
+}
+
+
+
+function updateEmployeeWorkload() {
+
+    const employeeId = workloadEmployeeSelect.value;
+
+    const employeeName =
+        document.getElementById("workload-employee-name");
+
+    
+    function showValue(id, value) {
+        const element = document.getElementById(id);
+
+        if (element) {
+            element.textContent = value;
+        }
+    }
+
+   
+    if (!employeeId) {
+
+        if (employeeName) {
+            employeeName.textContent =
+                "Select an employee to view their workload.";
+        }
+
+        showValue("workload-total", "—");
+        showValue("workload-completed", "—");
+        showValue("workload-pending", "—");
+        showValue("workload-progress", "—");
+        showValue("workload-overdue", "—");
+        showValue("workload-rate", "—");
+
+        return;
+    }
+
+    
+    const employee = employees.find(emp =>
+        emp.id === employeeId
+    );
+
+    if (!employee) return;
+
+    
+    const employeeTasks = tasks.filter(task =>
+        String(task.employee ?? task.employeeId) === employeeId
+    );
+
+   
+    const getStatus = task =>
+        String(task.status || "")
+            .trim()
+            .toLowerCase()
+            .replace(/\s+/g, "-");
+
+
+    const total = employeeTasks.length;
+
+    const completed = employeeTasks.filter(task =>
+        getStatus(task) === "completed"
+    ).length;
+
+    const pending = employeeTasks.filter(task =>
+        getStatus(task) === "pending"
+    ).length;
+
+    const inProgress = employeeTasks.filter(task =>
+        getStatus(task) === "in-progress"
+    ).length;
+
+  
+    const now = new Date();
+
+    const today =
+        now.getFullYear() + "-" +
+        String(now.getMonth() + 1).padStart(2, "0") + "-" +
+        String(now.getDate()).padStart(2, "0");
+
+    const overdue = employeeTasks.filter(task =>
+        getStatus(task) !== "completed" &&
+        task.deadline < today
+    ).length;
+
+   
+    const completionRate = total === 0
+        ? 0
+        : (completed / total) * 100;
+
+    
+    if (employeeName) {
+        employeeName.textContent =
+            employee.name + "'s Workload Report";
+    }
+
+    showValue("workload-total", total);
+    showValue("workload-completed", completed);
+    showValue("workload-pending", pending);
+    showValue("workload-progress", inProgress);
+    showValue("workload-overdue", overdue);
+    showValue(
+        "workload-rate",
+        completionRate.toFixed(1).replace(/\.0$/, "") + "%"
+    );
+}
+
+
+// history
+
+const eventHistory = (function () {
+    const history = [];
+
+    function addEvent(event, taskId, description) {
+        history.push({
+            event,
+            taskId: String(taskId),
+            description,
+            date: new Date().toLocaleString()
+        });
+    }
+
+    function getHistory() {
+        return history.map(record => ({ ...record }));
+    }
+
+    return {
+        addEvent,
+        getHistory
+    };
+})();
+
+
+/* history tracked and table m show */
+
+function renderHistory() {
+    const tbody = document.getElementById("history-table-body");
+
+    if (!tbody) return;
+
+    const records = eventHistory.getHistory();
+
+    if (records.length === 0) {
+        tbody.innerHTML = `
+            <tr>
+                <td colspan="4">No events recorded yet.</td>
+            </tr>
+        `;
+        return;
+    }
+
+    tbody.replaceChildren();
+
+    records.slice().reverse().forEach(record => {
+        const row = document.createElement("tr");
+
+        [
+            record.event,
+            record.taskId,
+            record.description,
+            record.date
+        ].forEach(value => {
+            const cell = document.createElement("td");
+            cell.textContent = value;
+            row.appendChild(cell);
+        });
+
+        tbody.appendChild(row);
+    });
+}
+
+
+function logTaskCreated(task) {
+    eventHistory.addEvent(
+        "Task Created",
+        task.id,
+        `Created task: ${task.title}`
+    );
+
+    renderHistory();
+}
+
+
+function logStatusChanged(taskId, oldStatus, newStatus) {
+    eventHistory.addEvent(
+        "Status Changed",
+        taskId,
+        `${oldStatus} → ${newStatus}`
+    );
+
+    renderHistory();
+}
+
+
+renderHistory();
